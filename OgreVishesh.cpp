@@ -33,14 +33,34 @@ OgreVishesh::~OgreVishesh(void)
 //-------------------------------------------------------------------------------------
 void OgreVishesh::createScene(void)
 {
-    
-  Ogre::SceneNode* headNode1 = mSceneMgr->getRootSceneNode()->createChildSceneNode("head1");
+    Ogre::Entity* ent1 = mSceneMgr->createEntity("Head1", "ogrehead.mesh");
+	Ogre::Entity* ent2 = mSceneMgr->createEntity("Head2", "Sinbad.mesh");
+	Ogre::Entity* ent3 = mSceneMgr->createEntity("Head3", "Sinbad.mesh");
+
+	Ogre::SceneNode* node1=mSceneMgr->createSceneNode("node1");
+	Ogre::SceneNode* node2=mSceneMgr->createSceneNode("node2");
+	Ogre::SceneNode* node3=mSceneMgr->createSceneNode("node3");
+
+	node1->setPosition(10,0,0);
+	node2->setPosition(0,10,20);
+	node3->setPosition(0,0,10);
+	mSceneMgr->getRootSceneNode()->addChild(node1);
+	node1->addChild(node2);
+	node2->addChild(node3);
+
+	node1->attachObject(ent1);
+	node2->attachObject(ent2);
+	node3->attachObject(ent3);
+
+
+    /* example 1
+	Ogre::SceneNode* headNode1 = mSceneMgr->getRootSceneNode()->createChildSceneNode("head1");
 	Ogre::SceneNode* node1 = mSceneMgr->createSceneNode("node1");
 
 	Ogre::SceneNode* headNode2 = headNode1->createChildSceneNode("head2",Ogre::Vector3(100,0,0));
     headNode1->attachObject(ogreHead1);
 	headNode2->attachObject(ogreHead2);
-	headNode2->translate(Ogre::Vector3(-100,0,100));
+	headNode2->translate(Ogre::Vector3(-100,0,100));*/
     // Set ambient light
     mSceneMgr->setAmbientLight(Ogre::ColourValue(1, 0.5, 0));
 
