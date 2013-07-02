@@ -3,7 +3,7 @@
 class MyApp
 {
 private:
-  Ogre::SceneManager* _mSceneMgr;
+	Ogre::SceneManager* _mSceneMgr;
 	Ogre::Root* _root;
 public:
 	MyApp()
@@ -47,14 +47,14 @@ public:
 
 	int startup()
 	{
-		Ogre::Root* root=new Ogre::Root("plugins_d.cfg");
-		if(!root->showConfigDialog())
+		_root=new Ogre::Root("plugins_d.cfg");
+		if(!_root->showConfigDialog())
 		{
 			return -1;
 		}
 		
-		Ogre::RenderWindow* window=root->initialise(true,"Ogre Vishesh");
-		_mSceneMgr = root->createSceneManager(Ogre::ST_GENERIC);
+		Ogre::RenderWindow* window=_root->initialise(true,"Ogre Vishesh");
+		_mSceneMgr = _root->createSceneManager(Ogre::ST_GENERIC);
 		Ogre::Camera* camera=_mSceneMgr->createCamera("Camera");
 		camera->setPosition(Ogre::Vector3(0,0,50));
 		camera->lookAt(0,0,0);
@@ -73,7 +73,7 @@ public:
 
 
 
-int main(void)
+int main()
 {
 	MyApp A;
 	A.startup();
